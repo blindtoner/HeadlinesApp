@@ -1,0 +1,11 @@
+utils/Utils.class
+mainPackage/HeadLinesClass.class
+mainPackage/ConnectToHeadLinesURL.class
+display/DisplayModel.class
+display/Display.class
+mainPackage/ConnectToHeadLinesURLWrapper.class
+mainPackage/Controller.class
+utils/FileInputReader.class
+mainPackage/ObservedData.class
+mainPackage/ConnectToHeadLinesURL$1.class
+mainPackage/MainApp.class
