@@ -1,31 +1,40 @@
 package mainPackage;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
+
+import javax.swing.Timer;
 
 import display.DisplayModel;
 
 public class ObservedData extends Observable {
-	
-    public void setHeadlines(List<String> headLines, DisplayModel displayModel) {
-    	
-        for (int s=displayModel.getId(); s<headLines.size(); s++){
-        	if (Thread.interrupted()) {
-                // We've been interrupted: no more crunching.
-                return;
-            }
-            //set change
-            setChanged();
-            //notify observers for change
-            notifyObservers(headLines.get(s));
-            displayModel.setId(s);
-            try {
-                Thread.sleep(10000);
-                System.out.println(Thread.currentThread() + "Observe Thread Sleep");
-            } catch (InterruptedException e) {
-                System.out.println("Error Occurred.");
-                return;
-            }
-        }
-    }
+
+	private int timerDelay;
+	private static Timer timer;
+
+	public void setHeadlines(List<String> headLines) {
+		DisplayModel.INSTANCE.setId(0);
+		timerDelay = 0;
+		timer = new Timer(5500, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged();
+				DisplayModel.INSTANCE.setId(timerDelay);
+				notifyObservers(headLines.get(timerDelay));
+				timerDelay++;
+			}
+		});
+		timer.setInitialDelay(100);
+		timer.start();
+	}
+
+	public static void pauseTimer() {
+		timer.stop();
+	}
+
+	public static void resumeTimer() {
+		timer.restart();
+	}
 }

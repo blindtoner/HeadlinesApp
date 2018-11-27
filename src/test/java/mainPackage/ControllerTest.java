@@ -10,14 +10,16 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import display.Display;
+import display.DisplayModel;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Controller.class, ConnectToHeadLinesURL.class })
+@PrepareForTest({ Controller.class, ConnectToHeadLinesURL.class, DisplayModel.class })
 public class ControllerTest {
 	@Test
 	public void testConstructorCallsAddObserver() throws Exception {
@@ -32,8 +34,7 @@ public class ControllerTest {
 
 		Controller controller = new Controller(mockObservedData);
 		PowerMockito.verifyNew(Display.class).withNoArguments();
-		verify(mockObservedData).addObserver(mockDisplay);
-
+		verify(mockObservedData, Mockito.atMost(1)).addObserver(mockDisplay);
 	}
 
 	@Test
@@ -52,11 +53,6 @@ public class ControllerTest {
 		PowerMockito.verifyNew(ConnectToHeadLinesURLWrapper.class).withNoArguments();
 		verify(mockConnectToHeadLinesURLWrapper).getDataFromHN();
 		assertEquals(expectedResults, mockConnectToHeadLinesURLWrapper.getDataFromHN());
-		// verify(mockObservedData).setHeadlines(expectedResults);
+		verify(mockDisplay);
 	}
-
-	@Test
-	public void testObservedListIsSetandNotifies() {
-	}
-
 }

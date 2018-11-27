@@ -1,6 +1,7 @@
 package display;
 
-public class DisplayModel {
+public enum DisplayModel {
+	INSTANCE;
 
 	int Id;
 
@@ -11,4 +12,5 @@ public class DisplayModel {
 	public void setId(int id) {
 		Id = id;
 	}
+
 }
