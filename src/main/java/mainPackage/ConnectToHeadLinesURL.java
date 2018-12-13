@@ -15,11 +15,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import utils.Utils;
+import utils.timer;
 
 public class ConnectToHeadLinesURL {
 
 	public static List<String> getDataFromHN() throws IOException {
-		long startTime = System.currentTimeMillis();
+		// long startTime = System.currentTimeMillis();
+		timer.INSTANCE.setTimerStart();
 		URL topStoriesURL = new URL("https://hacker-news.firebaseio.com/v0/topstories.json");
 		InputStream is = connectAndReturnInputSt(topStoriesURL);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
@@ -33,9 +35,11 @@ public class ConnectToHeadLinesURL {
 		for (int i = 0; i < storiesToRetrieve; i++) {
 			headLinesFromHnList.set(i, getHeadLineInfo(headLinesFromHnList.get(i)));
 		}
-		long stopTime = System.currentTimeMillis();
-		long runTime = stopTime - startTime;
-		System.out.println("Run time: " + runTime);
+		// long stopTime = System.currentTimeMillis();
+		timer.INSTANCE.setTimerEnd();
+		// long runTime = stopTime - startTime;
+		timer.INSTANCE.runTime();
+		// System.out.println("Run time: " + runTime);
 		return headLinesFromHnList;
 	}
 
@@ -57,7 +61,6 @@ public class ConnectToHeadLinesURL {
 			conn = url.openConnection();
 			conn.connect();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		InputStream is = conn.getInputStream();
