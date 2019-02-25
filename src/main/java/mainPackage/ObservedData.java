@@ -14,7 +14,7 @@ public class ObservedData extends Observable {
 	private int timerDelay;
 	private static Timer timer;
 
-	public void setHeadlines(List<String> headLines) {
+	public void setHeadlines(List<HeadLinesClass> headLines) {
 		DisplayModel.INSTANCE.setId(0);
 		timerDelay = 0;
 		timer = new Timer(5500, new ActionListener() {

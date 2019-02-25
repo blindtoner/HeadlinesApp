@@ -12,7 +12,7 @@ public class Controller {
 			observedData.addObserver(new Display());
 		});
 		ConnectToHeadLinesURLWrapper connectToHeadLinesURLWrapper = new ConnectToHeadLinesURLWrapper();
-		List<String> headLinesList = connectToHeadLinesURLWrapper.getDataFromHN();
+		List<HeadLinesClass> headLinesList = connectToHeadLinesURLWrapper.getDataFromHN();
 		observedData.setHeadlines(headLinesList);
 	}
 }

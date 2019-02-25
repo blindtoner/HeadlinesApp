@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import mainPackage.IDisplayContents;
 import mainPackage.ObservedData;
 
 public class Display extends JFrame implements Observer, ActionListener {
@@ -30,7 +31,7 @@ public class Display extends JFrame implements Observer, ActionListener {
 	JLabel logo;
 	Button linkButton;
 	Button stopButton;
-	String dataObject;
+	IDisplayContents dataObject;
 
 	public Display() {
 		this.setTitle("Tech HeadLines App");
@@ -88,8 +89,9 @@ public class Display extends JFrame implements Observer, ActionListener {
 	public void update(Observable observable, Object data) {
 		linkButton.setEnabled(true);
 		stopButton.setEnabled(true);
-		dataObject = data.toString();
-		mainTextArea.setText(data.toString());
+
+		dataObject = (IDisplayContents) data;
+		mainTextArea.setText(dataObject.getDisplayTitle() + "\n" + dataObject.getDisplayWebAddress());
 
 	}
 
@@ -119,7 +121,7 @@ public class Display extends JFrame implements Observer, ActionListener {
 	public void handleLinkButton() {
 		String webAddress = null;
 		try {
-			webAddress = dataObject.substring(dataObject.indexOf("http"));
+			webAddress = dataObject.getDisplayWebAddress();
 		} catch (StringIndexOutOfBoundsException e2) {
 		}
 

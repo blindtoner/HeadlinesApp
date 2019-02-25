@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -19,7 +20,7 @@ import utils.timer;
 
 public class ConnectToHeadLinesURL {
 
-	public static List<String> getDataFromHN() throws IOException {
+	public static List<HeadLinesClass> getDataFromHN() throws IOException {
 		timer.INSTANCE.setTimerStart();
 		URL topStoriesURL = new URL("https://hacker-news.firebaseio.com/v0/topstories.json");
 		InputStream is = connectAndReturnInputSt(topStoriesURL);
@@ -28,24 +29,24 @@ public class ConnectToHeadLinesURL {
 		Type listType = new TypeToken<List<String>>() {
 		}.getType();
 		Gson gson = new Gson();
-		List<String> headLinesFromHnList = gson.fromJson(json, listType);
-
+		List<String> headLinesFromHnStringList = gson.fromJson(json, listType);
+		List<HeadLinesClass> headLinesFromHnHeadlinesList = new ArrayList<HeadLinesClass>();
 		int storiesToRetrieve = Utils.getAmountOfHeadlinesProperty();
 		for (int i = 0; i < storiesToRetrieve; i++) {
-			headLinesFromHnList.set(i, getHeadLineInfo(headLinesFromHnList.get(i)));
+			headLinesFromHnHeadlinesList.add(i, getHeadLineInfo(headLinesFromHnStringList.get(i) + ""));
 		}
 		timer.INSTANCE.setTimerEnd();
 		timer.INSTANCE.runTime();
-		return headLinesFromHnList;
+		return headLinesFromHnHeadlinesList;
 	}
 
-	private static String getHeadLineInfo(String string) throws IOException {
+	private static HeadLinesClass getHeadLineInfo(String string) throws IOException {
 		URL topStoriesURLTitle = new URL("https://hacker-news.firebaseio.com/v0/item/" + string + ".json");
 		InputStream is = connectAndReturnInputSt(topStoriesURLTitle);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
 		Gson gson = new Gson();
 		HeadLinesClass headLinesClass = gson.fromJson(json, HeadLinesClass.class);
-		return headLinesClass.getTitle() + " - " + headLinesClass.getUrl();
+		return headLinesClass;
 
 	}
 
