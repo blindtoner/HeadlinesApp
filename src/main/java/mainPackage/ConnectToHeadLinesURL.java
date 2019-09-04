@@ -20,7 +20,7 @@ import utils.timer;
 
 public class ConnectToHeadLinesURL {
 
-	public static List<HeadLinesClass> getDataFromHN() throws IOException {
+	public static List<HNHeadLinesModel> getDataFromHN() throws IOException {
 		timer.INSTANCE.setTimerStart();
 		URL topStoriesURL = new URL("https://hacker-news.firebaseio.com/v0/topstories.json");
 		InputStream is = connectAndReturnInputSt(topStoriesURL);
@@ -30,7 +30,7 @@ public class ConnectToHeadLinesURL {
 		}.getType();
 		Gson gson = new Gson();
 		List<String> headLinesFromHnStringList = gson.fromJson(json, listType);
-		List<HeadLinesClass> headLinesFromHnHeadlinesList = new ArrayList<HeadLinesClass>();
+		List<HNHeadLinesModel> headLinesFromHnHeadlinesList = new ArrayList<HNHeadLinesModel>();
 		int storiesToRetrieve = Utils.getAmountOfHeadlinesProperty();
 		for (int i = 0; i < storiesToRetrieve; i++) {
 			headLinesFromHnHeadlinesList.add(i, getHeadLineInfo(headLinesFromHnStringList.get(i) + ""));
@@ -40,12 +40,12 @@ public class ConnectToHeadLinesURL {
 		return headLinesFromHnHeadlinesList;
 	}
 
-	private static HeadLinesClass getHeadLineInfo(String string) throws IOException {
+	private static HNHeadLinesModel getHeadLineInfo(String string) throws IOException {
 		URL topStoriesURLTitle = new URL("https://hacker-news.firebaseio.com/v0/item/" + string + ".json");
 		InputStream is = connectAndReturnInputSt(topStoriesURLTitle);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
 		Gson gson = new Gson();
-		HeadLinesClass headLinesClass = gson.fromJson(json, HeadLinesClass.class);
+		HNHeadLinesModel headLinesClass = gson.fromJson(json, HNHeadLinesModel.class);
 		return headLinesClass;
 
 	}

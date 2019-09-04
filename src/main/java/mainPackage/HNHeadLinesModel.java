@@ -1,6 +1,6 @@
 package mainPackage;
 
-public class HeadLinesClass implements IDisplayContents {
+public class HNHeadLinesModel implements IDisplayContents {
 	private String by;
 	private int descendants;
 	private int id;
@@ -11,70 +11,87 @@ public class HeadLinesClass implements IDisplayContents {
 	private String type;
 	private String url;
 
+	@Override
 	public String getBy() {
 		return by;
 	}
 
+	@Override
 	public void setBy(String by) {
 		this.by = by;
 	}
 
+	@Override
 	public int getDescendants() {
 		return descendants;
 	}
 
+	@Override
 	public void setDescendants(int descendants) {
 		this.descendants = descendants;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	@Override
 	public int[] getKids() {
 		return kids;
 	}
 
+	@Override
 	public void setKids(int[] kids) {
 		this.kids = kids;
 	}
 
+	@Override
 	public int getScore() {
 		return score;
 	}
 
+	@Override
 	public void setScore(int score) {
 		this.score = score;
 	}
 
+	@Override
 	public int getTime() {
 		return time;
 	}
 
+	@Override
 	public void setTime(int time) {
 		this.time = time;
 	}
 
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	@Override
 	public String getType() {
 		return type;
 	}
 
+	@Override
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	@Override
 	public String getUrl() {
 		if (url != null)
 			return url;
@@ -82,6 +99,7 @@ public class HeadLinesClass implements IDisplayContents {
 			return "";
 	}
 
+	@Override
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -100,14 +118,4 @@ public class HeadLinesClass implements IDisplayContents {
 		return builder.toString();
 	}
 
-	@Override
-	public String getDisplayWebAddress() {
-		return this.url;
-	}
-
-	@Override
-	public String getDisplayTitle() {
-
-		return this.title;
-	}
 }

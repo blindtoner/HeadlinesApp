@@ -29,7 +29,7 @@ public class ControllerTest {
 		ConnectToHeadLinesURLWrapper mockConnectToHeadLinesURLWrapper = mock(ConnectToHeadLinesURLWrapper.class);
 		PowerMockito.whenNew(ConnectToHeadLinesURLWrapper.class).withNoArguments()
 				.thenReturn(mockConnectToHeadLinesURLWrapper);
-		List<HeadLinesClass> expectedResults = Arrays.asList(new HeadLinesClass(), new HeadLinesClass());
+		List<HNHeadLinesModel> expectedResults = Arrays.asList(new HNHeadLinesModel(), new HNHeadLinesModel());
 		when(mockConnectToHeadLinesURLWrapper.getDataFromHN()).thenReturn(expectedResults);
 
 		Controller controller = new Controller(mockObservedData);
@@ -42,7 +42,7 @@ public class ControllerTest {
 		Display mockDisplay = mock(Display.class);
 		PowerMockito.whenNew(Display.class).withNoArguments().thenReturn(mockDisplay);
 		ObservedData mockObservedData = mock(ObservedData.class);
-		List<HeadLinesClass> expectedResults = Arrays.asList(new HeadLinesClass(), new HeadLinesClass());
+		List<HNHeadLinesModel> expectedResults = Arrays.asList(new HNHeadLinesModel(), new HNHeadLinesModel());
 
 		ConnectToHeadLinesURLWrapper mockConnectToHeadLinesURLWrapper = mock(ConnectToHeadLinesURLWrapper.class);
 		PowerMockito.whenNew(ConnectToHeadLinesURLWrapper.class).withNoArguments()

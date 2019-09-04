@@ -91,7 +91,7 @@ public class Display extends JFrame implements Observer, ActionListener {
 		stopButton.setEnabled(true);
 
 		dataObject = (IDisplayContents) data;
-		mainTextArea.setText(dataObject.getDisplayTitle() + "\n" + dataObject.getDisplayWebAddress());
+		mainTextArea.setText(dataObject.getTitle() + "\n" + dataObject.getUrl());
 
 	}
 
@@ -121,7 +121,7 @@ public class Display extends JFrame implements Observer, ActionListener {
 	public void handleLinkButton() {
 		String webAddress = null;
 		try {
-			webAddress = dataObject.getDisplayWebAddress();
+			webAddress = dataObject.getUrl();
 		} catch (StringIndexOutOfBoundsException e2) {
 		}
 

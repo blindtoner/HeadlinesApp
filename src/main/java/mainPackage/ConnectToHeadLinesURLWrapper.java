@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ConnectToHeadLinesURLWrapper {
 
-	public List<HeadLinesClass> getDataFromHN() {
+	public List<HNHeadLinesModel> getDataFromHN() {
 		try {
 			return ConnectToHeadLinesURL.getDataFromHN();
 		} catch (IOException e) {

@@ -14,10 +14,11 @@ public class ObservedData extends Observable {
 	private int timerDelay;
 	private static Timer timer;
 
-	public void setHeadlines(List<HeadLinesClass> headLines) {
+	public void setHeadlines(List<HNHeadLinesModel> headLines) {
 		DisplayModel.INSTANCE.setId(0);
 		timerDelay = 0;
-		timer = new Timer(5500, new ActionListener() {
+		int timerDelayTimeInMilliseconds = 6000;
+		timer = new Timer(timerDelayTimeInMilliseconds, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
