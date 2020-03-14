@@ -7,12 +7,11 @@ import javax.swing.SwingUtilities;
 import display.Display;
 
 public class Controller {
-	public Controller(ObservedData observedData) {
+	public Controller(ObservedData observedData, ConnectToHeadLinesURLWrapper connectToHeadLinesURLWrapper) {
 		SwingUtilities.invokeLater(() -> {
 			observedData.addObserver(new Display());
 		});
-		ConnectToHeadLinesURLWrapper connectToHeadLinesURLWrapper = new ConnectToHeadLinesURLWrapper();
 		List<HNHeadLinesModel> headLinesList = connectToHeadLinesURLWrapper.getDataFromHN();
-		observedData.setHeadlines(headLinesList);
+		observedData.setProperty(headLinesList);
 	}
 }

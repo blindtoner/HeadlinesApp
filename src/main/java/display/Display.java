@@ -8,11 +8,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,7 +25,7 @@ import javax.swing.border.EmptyBorder;
 import mainPackage.IDisplayContents;
 import mainPackage.ObservedData;
 
-public class Display extends JFrame implements Observer, ActionListener {
+public class Display extends JFrame implements PropertyChangeListener, ActionListener {
 
 	private static final long serialVersionUID = 8060043667278373218L;
 	JTextArea mainTextArea;
@@ -86,13 +87,12 @@ public class Display extends JFrame implements Observer, ActionListener {
 	}
 
 	@Override
-	public void update(Observable observable, Object data) {
+	public void propertyChange(PropertyChangeEvent evt) {
 		linkButton.setEnabled(true);
 		stopButton.setEnabled(true);
 
-		dataObject = (IDisplayContents) data;
+		dataObject = (IDisplayContents) evt.getNewValue();
 		mainTextArea.setText(dataObject.getTitle() + "\n" + dataObject.getUrl());
-
 	}
 
 	@Override

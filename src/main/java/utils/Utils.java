@@ -16,5 +16,14 @@ public class Utils {
 		Utils.getAppProperties();
 		return Integer.parseInt(props.getProperty("getAmountOfHeadlines"));
 	}
+	
+	public static String getSourceURL() throws IOException{
+		Utils.getAppProperties();
+		return props.getProperty("sourceURL");
+	}
+	public static String getSourceURLTitle() throws IOException{
+		Utils.getAppProperties();
+		return props.getProperty("sourceURLTitle");
+	}
 
 }

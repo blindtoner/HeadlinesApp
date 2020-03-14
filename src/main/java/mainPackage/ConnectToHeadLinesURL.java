@@ -21,8 +21,7 @@ import utils.timer;
 public class ConnectToHeadLinesURL {
 
 	public static List<HNHeadLinesModel> getDataFromHN() throws IOException {
-		timer.INSTANCE.setTimerStart();
-		URL topStoriesURL = new URL("https://hacker-news.firebaseio.com/v0/topstories.json");
+		URL topStoriesURL = new URL(Utils.getSourceURL());
 		InputStream is = connectAndReturnInputSt(topStoriesURL);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
 
@@ -35,19 +34,16 @@ public class ConnectToHeadLinesURL {
 		for (int i = 0; i < storiesToRetrieve; i++) {
 			headLinesFromHnHeadlinesList.add(i, getHeadLineInfo(headLinesFromHnStringList.get(i) + ""));
 		}
-		timer.INSTANCE.setTimerEnd();
-		timer.INSTANCE.runTime();
 		return headLinesFromHnHeadlinesList;
 	}
 
 	private static HNHeadLinesModel getHeadLineInfo(String string) throws IOException {
-		URL topStoriesURLTitle = new URL("https://hacker-news.firebaseio.com/v0/item/" + string + ".json");
+		URL topStoriesURLTitle = new URL(Utils.getSourceURLTitle() + string + ".json");
 		InputStream is = connectAndReturnInputSt(topStoriesURLTitle);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
 		Gson gson = new Gson();
 		HNHeadLinesModel headLinesClass = gson.fromJson(json, HNHeadLinesModel.class);
 		return headLinesClass;
-
 	}
 
 	private static InputStream connectAndReturnInputSt(URL urlParameter) throws IOException {
