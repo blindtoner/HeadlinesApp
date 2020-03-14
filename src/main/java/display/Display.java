@@ -13,7 +13,6 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Observable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -27,12 +26,11 @@ import mainPackage.ObservedData;
 
 public class Display extends JFrame implements PropertyChangeListener, ActionListener {
 
-	private static final long serialVersionUID = 8060043667278373218L;
-	JTextArea mainTextArea;
-	JLabel logo;
-	Button linkButton;
-	Button stopButton;
-	IDisplayContents dataObject;
+	private JTextArea mainTextArea;
+	private JLabel logo;
+	private Button linkButton;
+	private Button stopButton;
+	private IDisplayContents dataObject;
 
 	public Display() {
 		this.setTitle("Tech HeadLines App");
@@ -57,35 +55,6 @@ public class Display extends JFrame implements PropertyChangeListener, ActionLis
 		this.setVisible(true);
 	}
 
-	private void setButtons() {
-		linkButton = new Button();
-		linkButton.setLabel("Open Browser");
-		linkButton.setForeground(Color.GRAY);
-		linkButton.addActionListener(this);
-		linkButton.setEnabled(false);
-		linkButton.setActionCommand("linkButton");
-
-		stopButton = new Button();
-		stopButton.setLabel("Stop");
-		stopButton.setForeground(Color.GRAY);
-		stopButton.addActionListener(this);
-		stopButton.setEnabled(false);
-		stopButton.setActionCommand("stopButton");
-	}
-
-	JTextArea setupWindow() {
-		JTextArea textArea = new JTextArea();
-		textArea.setFont(new Font("Verdana", Font.PLAIN, 15));
-		textArea.setBackground(Color.GRAY);
-		textArea.setForeground(Color.WHITE);
-		textArea.setOpaque(true);
-		textArea.setLineWrap(true);
-		textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
-		textArea.setEditable(false);
-		logo = new JLabel(new ImageIcon(getClass().getResource("logo.png")));
-		return textArea;
-	}
-
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		linkButton.setEnabled(true);
@@ -107,7 +76,7 @@ public class Display extends JFrame implements PropertyChangeListener, ActionLis
 		}
 	}
 
-	public void handleStopButton(Button button) {
+	private void handleStopButton(Button button) {
 		if (button.getLabel().equals("Stop")) {
 			stopButton.setLabel("Resume");
 			ObservedData.pauseTimer();
@@ -118,7 +87,7 @@ public class Display extends JFrame implements PropertyChangeListener, ActionLis
 
 	}
 
-	public void handleLinkButton() {
+	private void handleLinkButton() {
 		String webAddress = null;
 		try {
 			webAddress = dataObject.getUrl();
@@ -134,5 +103,34 @@ public class Display extends JFrame implements PropertyChangeListener, ActionLis
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	private JTextArea setupWindow() {
+		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Verdana", Font.PLAIN, 15));
+		textArea.setBackground(Color.GRAY);
+		textArea.setForeground(Color.WHITE);
+		textArea.setOpaque(true);
+		textArea.setLineWrap(true);
+		textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+		textArea.setEditable(false);
+		logo = new JLabel(new ImageIcon(getClass().getResource("logo.png")));
+		return textArea;
+	}
+
+	private void setButtons() {
+		linkButton = new Button();
+		linkButton.setLabel("Open Browser");
+		linkButton.setForeground(Color.GRAY);
+		linkButton.addActionListener(this);
+		linkButton.setEnabled(false);
+		linkButton.setActionCommand("linkButton");
+	
+		stopButton = new Button();
+		stopButton.setLabel("Stop");
+		stopButton.setForeground(Color.GRAY);
+		stopButton.addActionListener(this);
+		stopButton.setEnabled(false);
+		stopButton.setActionCommand("stopButton");
 	}
 }

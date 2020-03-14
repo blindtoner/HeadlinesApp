@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import utils.Utils;
-import utils.timer;
 
 public class ConnectToHeadLinesURL {
 
@@ -42,8 +41,7 @@ public class ConnectToHeadLinesURL {
 		InputStream is = connectAndReturnInputSt(topStoriesURLTitle);
 		String json = IOUtils.toString(is, Charset.forName("UTF-8"));
 		Gson gson = new Gson();
-		HNHeadLinesModel headLinesClass = gson.fromJson(json, HNHeadLinesModel.class);
-		return headLinesClass;
+		return gson.fromJson(json, HNHeadLinesModel.class);
 	}
 
 	private static InputStream connectAndReturnInputSt(URL urlParameter) throws IOException {
@@ -56,7 +54,6 @@ public class ConnectToHeadLinesURL {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		InputStream is = conn.getInputStream();
-		return is;
+		return conn.getInputStream();
 	}
 }

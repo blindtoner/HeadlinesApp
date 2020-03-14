@@ -14,7 +14,7 @@ import display.DisplayModel;
 public class ObservedData {
 
 	List<HNHeadLinesModel> property= new ArrayList<HNHeadLinesModel>();
-	PropertyChangeSupport pcs = new  PropertyChangeSupport(this);
+	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private int timerDelay;
 	private static Timer timer;
 
