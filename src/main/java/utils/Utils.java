@@ -13,8 +13,12 @@ public class Utils {
 		props.load(in);
 		in.close();
 	}
-	public  int getAmountOfHeadlinesProperty() throws IOException{
-		getAppProperties();
+	public  int getAmountOfHeadlinesProperty() {
+		try {
+			getAppProperties();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return Integer.parseInt(props.getProperty("getAmountOfHeadlines"));
 	}
 	

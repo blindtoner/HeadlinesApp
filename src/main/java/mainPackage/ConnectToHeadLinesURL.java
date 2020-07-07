@@ -43,7 +43,7 @@ public class ConnectToHeadLinesURL {
 		HNHeadLinesModel[] headLinesFromHnHeadlinesDetailsList = new HNHeadLinesModel[storiesToRetrieve];
 		
 		for (int i = 0; i < storiesToRetrieve; i++) {
-			HNHeadLinesModel headLineInfo = getHeadLineInfo(_urlConnectionWrapper,_gson, headLinesItemList.get(i) + "");
+			HNHeadLinesModel headLineInfo = getHeadLineInfo(_urlConnectionWrapper,_gson, headLinesItemList.get(i));
 			headLinesFromHnHeadlinesDetailsList[i] = headLineInfo;
 		}
 		return Arrays.asList(headLinesFromHnHeadlinesDetailsList);
@@ -51,8 +51,8 @@ public class ConnectToHeadLinesURL {
 
 	private HNHeadLinesModel getHeadLineInfo(URLConnectionWrapper urlConnectionWrapper, GsonWrapper gson, String string) throws IOException {
 		URL topStoriesURLTitle = new URL(_Utils.getSourceURLTitle() + string + ".json");
-		InputStream is = _urlConnectionWrapper.connectAndReturnInputSt(topStoriesURLTitle);
-		String json = _IOUtils.toString(is, Charset.forName("UTF-8"));
+		InputStream inputStreamForTopStoryItem = _urlConnectionWrapper.connectAndReturnInputSt(topStoriesURLTitle);
+		String json = _IOUtils.toString(inputStreamForTopStoryItem, Charset.forName("UTF-8"));
 		return _gson.fromJson(json, HNHeadLinesModel.class);
 	}
 

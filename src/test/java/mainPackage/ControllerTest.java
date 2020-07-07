@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 
 import display.Display;
 import models.HNHeadLinesModel;
+import utils.Utils;
 
 public class ControllerTest {
 	@Test
@@ -24,7 +25,8 @@ public class ControllerTest {
 		when(mockConnectToHeadLinesURLWrapper.getDataFromHN()).thenReturn(expectedResults);
 
 		Controller controller = new Controller(mockObservedData, mockConnectToHeadLinesURLWrapper);
-		verify(mockObservedData, Mockito.atMost(1)).addObserver(mockDisplay);
+		Utils mockUtils = mock(Utils.class);
+		verify(mockObservedData, Mockito.atMost(1)).addObserver(mockDisplay, mockUtils.getAmountOfHeadlinesProperty());
 	}
 
 	@Test
