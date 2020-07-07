@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.Timer;
 
 import display.DisplayModel;
+import models.HNHeadLinesModel;
 
 public class ObservedData {
 
@@ -24,7 +25,7 @@ public class ObservedData {
 			
 			DisplayModel.INSTANCE.setId(0);
 			timerDelay = 0;
-			int timerDelayTimeInMilliseconds = 6000;
+			int timerDelayTimeInMilliseconds = 1000;
 			timer = new Timer(timerDelayTimeInMilliseconds, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

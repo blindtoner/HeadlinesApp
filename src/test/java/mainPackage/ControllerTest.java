@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import display.Display;
+import models.HNHeadLinesModel;
 
 public class ControllerTest {
 	@Test

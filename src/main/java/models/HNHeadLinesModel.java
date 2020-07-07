@@ -1,4 +1,4 @@
-package mainPackage;
+package models;
 
 public class HNHeadLinesModel implements IDisplayContents {
 	private String by;

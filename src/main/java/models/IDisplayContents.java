@@ -1,4 +1,4 @@
-package mainPackage;
+package models;
 
 public interface IDisplayContents {
 

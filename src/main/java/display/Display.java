@@ -21,8 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import mainPackage.IDisplayContents;
 import mainPackage.ObservedData;
+import models.IDisplayContents;
 
 public class Display extends JFrame implements PropertyChangeListener, ActionListener {
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import display.Display;
+import models.HNHeadLinesModel;
 
 public class Controller {
 	public Controller(ObservedData observedData, ConnectToHeadLinesURLWrapper connectToHeadLinesURLWrapper) {

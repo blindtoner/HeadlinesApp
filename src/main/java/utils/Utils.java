@@ -6,23 +6,24 @@ import java.util.Properties;
 
 public class Utils {
 	static Properties props;
-	private static void getAppProperties() throws IOException {
+	
+	private  void getAppProperties() throws IOException {
 		props = new Properties();
 		InputStream in = Utils.class.getResourceAsStream("app.properties");
 		props.load(in);
 		in.close();
 	}
-	public static int getAmountOfHeadlinesProperty() throws IOException{
-		Utils.getAppProperties();
+	public  int getAmountOfHeadlinesProperty() throws IOException{
+		getAppProperties();
 		return Integer.parseInt(props.getProperty("getAmountOfHeadlines"));
 	}
 	
-	public static String getSourceURL() throws IOException{
-		Utils.getAppProperties();
+	public  String getSourceURL() throws IOException{
+		getAppProperties();
 		return props.getProperty("sourceURL");
 	}
-	public static String getSourceURLTitle() throws IOException{
-		Utils.getAppProperties();
+	public  String getSourceURLTitle() throws IOException{
+		getAppProperties();
 		return props.getProperty("sourceURLTitle");
 	}
 
